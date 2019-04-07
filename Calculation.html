@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Calculation</title>
+</head>
+
+<body>
+    <div class="container text-center ">
+        <table border=3 class="table table-dark">
+            <tr>
+                <td align="center" colspan="5">
+                    <input align="right" type="text" value="0" id="box" class="btn btn-border-secondary btn-block" />
+                </td>
+            </tr>
+
+            <tr align="center">
+                <td> <input type="button" value="7" onClick="numBtn('7')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="8" onClick="numBtn('8')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="9" onClick="numBtn('9')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="+" onClick="operBtn('+')" class="btn btn-secondary btn-block "> </td>
+            </tr>
+
+            <tr align="center">
+                <td> <input type="button" value="4" onClick="numBtn('4')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="5" onClick="numBtn('5')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="6" onClick="numBtn('6')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="-" onClick="operBtn('-')" class="btn btn-secondary btn-block "> </td>
+
+            </tr>
+
+            <tr align="center">
+                <td> <input type="button" value="1" onClick="numBtn('1')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="2" onClick="numBtn('2')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="3" onClick="numBtn('3')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="*" onClick="operBtn('*')" class="btn btn-secondary btn-block "> </td>
+
+            </tr>
+
+            <tr align="center">
+                <td> <input type="button" value="0" onClick="numBtn('0')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="." onClick="numBtn('.')" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="=" onClick="equal()" class="btn btn-secondary btn-block "> </td>
+                <td> <input type="button" value="/" onClick="operBtn('/')" class="btn btn-secondary btn-block "> </td>
+
+                </td>
+            </tr>
+            <tr align="center" >
+                <td colspan="4"><input id="mC" type="button" value="MC" onClick="buttonM('MC')"
+                        class="btn btn-secondary btn-block ">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var temp = 0;  //暫存被運算數
+
+        var strOper = 0;  //暫存運算符號
+
+        var valueM = 0;  //m+ m- mc mr 暫存使用
+
+
+        //數字鍵與小數點
+
+        function numBtn(str) {
+
+            //避免填入運算後的數字的後面
+
+            if (strOper == null) {
+                document.getElementById("box").value = str;
+                strOper = 0;
+                return;
+            };
+
+            if (document.getElementById("box").value == 0) {
+                document.getElementById("box").value = str;
+            } else {
+                document.getElementById("box").value += str;
+            }
+
+        }
+
+
+        //運算符號
+
+        function operBtn(str) {
+
+            //不按等號的連續運算
+
+            equal();
+
+            valueA = document.getElementById("box").value;
+            strOper = str;
+
+            document.getElementById("box").value = 0;
+        }
+
+        //等於
+
+        function equal() {
+
+            switch (strOper) {
+                case '+':
+                    document.getElementById("box").value = parseFloat(valueA) + parseFloat(document.getElementById("box").value);
+                    break;
+                case '-':
+                    document.getElementById("box").value = parseFloat(valueA) - parseFloat(document.getElementById("box").value);
+                    break;
+                case '*':
+                    document.getElementById("box").value = parseFloat(valueA) * parseFloat(document.getElementById("box").value);
+                    break;
+                case '/':
+                    document.getElementById("box").value = parseFloat(valueA) / parseFloat(document.getElementById("box").value);
+                    break;
+                default:
+                    break;
+            }
+        }
+        function buttonM(str) {
+
+            switch (str) {
+
+                case 'MC':
+                    temp = 0;
+                    strOper = 0;
+                    valueM = 0;
+                    document.getElementById("box").value = '0';
+                    break;
+                    temp = null;
+                    strOper = null;
+                    break;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
